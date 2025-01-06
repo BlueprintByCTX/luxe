@@ -10,6 +10,8 @@ cache:
 build:
   stage: build
   script:
+    - npm -v
+    - node -v
     - npm install
     - npm run build
   artifacts:
