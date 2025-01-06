@@ -7,6 +7,9 @@ cache:
     - node_modules/
 
 before_script:
+  - curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+  - apt install -y nodejs
+  - curl -L https://npmjs.org/install.sh | sh
   - npm install
 
 build:
