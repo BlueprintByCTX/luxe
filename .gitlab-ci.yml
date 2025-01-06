@@ -20,7 +20,6 @@ build:
       - dist/
     expire_in: 1 week
     public: false
-  needs: ['test']
 
 deploy:
   stage: deploy
@@ -35,3 +34,4 @@ deploy:
   only:
     - main
     - staging
+  needs: ['build']
