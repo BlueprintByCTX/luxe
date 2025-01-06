@@ -1,5 +1,3 @@
-image: node:22-alpine
-
 stages:
   - build
   - deploy
@@ -25,13 +23,5 @@ deploy:
   stage: deploy
   script:
     - npm install -g firebase-tools
-    - |
-      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
-        firebase deploy --only hosting:production --token $FIREBASE_TOKEN
-      else
-        firebase deploy --only hosting:staging --token $FIREBASE_TOKEN
-      fi
-  only:
-    - main
-    - staging
+    - firebase deploy --token $FIREBASE_TOKEN
   needs: ['build']
