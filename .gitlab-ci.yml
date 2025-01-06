@@ -1,4 +1,7 @@
+image: node:22-alpine
+
 stages:
+  - test
   - build
   - deploy
 
@@ -6,23 +9,43 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
+  policy: pull-push
+
+test:
+  stage: test
+  script:
+    - apk add --no-cache git # Required for npm install if dependencies reference git
+    - npm install
+    - npm run lint
+    - npm test
+  only:
+    - merge_requests
+    - main
 
 build:
   stage: build
   script:
-    - npm -v
-    - node -v
+    - apk add --no-cache git # Ensure Git is available for npm
     - npm install
     - npm run build
   artifacts:
     paths:
       - dist/
-    expire_in: 1 week # Artifacts will be available for a week
+    expire_in: 1 week
+    public: false
+  needs: ['test']
 
 deploy:
   stage: deploy
   script:
+    - apk add --no-cache bash git
     - npm install -g firebase-tools
-    - firebase deploy --token $FIREBASE_TOKEN
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
+        firebase deploy --only hosting:production --token $FIREBASE_TOKEN
+      else
+        firebase deploy --only hosting:staging --token $FIREBASE_TOKEN
+      fi
   only:
     - main
+    - staging
