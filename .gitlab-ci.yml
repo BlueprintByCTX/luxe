@@ -14,7 +14,6 @@ cache:
 test:
   stage: test
   script:
-    - apk add --no-cache git # Required for npm install if dependencies reference git
     - npm install
     - npm run lint
     - npm test
