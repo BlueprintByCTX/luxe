@@ -6,13 +6,8 @@ cache:
   paths:
     - node_modules/
 
-before_script:
-  - curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-  - apt install -y nodejs
-  - curl -L https://npmjs.org/install.sh | sh
-  - npm install
-
 build:
+  image: npm:latest
   stage: build
   script:
     - npm run build
@@ -21,6 +16,7 @@ build:
       - dist/
 
 deploy:
+  image: npm:latest
   stage: deploy
   script:
     - npm install -g firebase-tools
