@@ -59,4 +59,4 @@ deploy:
     - build_main
     - build_magazine
   only:
-    - main
+    - master
