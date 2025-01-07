@@ -28,9 +28,9 @@ build_main:
       - main/dist/
     expire_in: 1 week
     public: false
-  # only:
-  #   changes:
-  #     - main/**/*
+  only:
+    changes:
+      - main/**/*
   needs:
     - install_dependencies
 
@@ -43,20 +43,28 @@ build_magazine:
       - magazine/dist/
     expire_in: 1 week
     public: false
-  # only:
-  #   changes:
-  #     - magazine/**/*
+  only:
+    changes:
+      - magazine/**/*
   needs:
     - install_dependencies
 
-deploy:
+deploy_main:
   stage: deploy
   script:
-    - npm install -g firebase-tools
-    - firebase deploy --token $FIREBASE_TOKEN --only hosting:main
-    - firebase deploy --token $FIREBASE_TOKEN --only hosting:magazine
+    - if [ -d main/dist ]; then npm install -g firebase-tools && firebase deploy --token $FIREBASE_TOKEN --only hosting:main; fi
   needs:
     - build_main
+  when: on_success
+  only:
+    - main
+
+deploy_magazine:
+  stage: deploy
+  script:
+    - if [ -d magazine/dist ]; then npm install -g firebase-tools && firebase deploy --token $FIREBASE_TOKEN --only hosting:magazine; fi
+  needs:
     - build_magazine
+  when: on_success
   only:
     - main
