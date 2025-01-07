@@ -1,4 +1,5 @@
 stages:
+  - install
   - build
   - deploy
 
@@ -9,7 +10,7 @@ cache:
   policy: pull-push
 
 install_dependencies:
-  stage: build
+  stage: install
   script:
     - npm ci
   artifacts:
