@@ -8,20 +8,44 @@ cache:
     - node_modules/
   policy: pull-push
 
-build:
+build_main:
   stage: build
   script:
-    - npm install
+    - cd main
+    - npm ci
     - npm run build
   artifacts:
     paths:
-      - dist/
+      - main/dist/
     expire_in: 1 week
     public: false
+  only:
+    changes:
+      - main/**/*
+
+build_magazine:
+  stage: build
+  script:
+    - cd magazine
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - magazine/dist/
+    expire_in: 1 week
+    public: false
+  only:
+    changes:
+      - magazine/**/*
 
 deploy:
   stage: deploy
   script:
     - npm install -g firebase-tools
-    - firebase deploy --token $FIREBASE_TOKEN
-  needs: ['build']
+    - firebase deploy --token $FIREBASE_TOKEN --only hosting:main
+    - firebase deploy --token $FIREBASE_TOKEN --only hosting:magazine
+  needs:
+    - build_main
+    - build_magazine
+  only:
+    - main
