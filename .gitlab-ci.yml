@@ -17,7 +17,6 @@ build_main:
     paths:
       - main/dist/
     expire_in: 1 week
-    public: false
   only:
     changes:
       - main/**/*
@@ -31,7 +30,6 @@ build_magazine:
     paths:
       - magazine/dist/
     expire_in: 1 week
-    public: false
   only:
     changes:
       - magazine/**/*
