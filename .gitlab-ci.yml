@@ -8,12 +8,20 @@ cache:
     - node_modules/
   policy: pull-push
 
+install_dependencies:
+  stage: build
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 week
+    public: false
+
 build_main:
   stage: build
   script:
-    - cd main
-    - npm ci
-    - npm run build
+    - npm run build --workspace=main
   artifacts:
     paths:
       - main/dist/
@@ -22,13 +30,13 @@ build_main:
   only:
     changes:
       - main/**/*
+  needs:
+    - install_dependencies
 
 build_magazine:
   stage: build
   script:
-    - cd magazine
-    - npm ci
-    - npm run build
+    - npm run build --workspace=magazine
   artifacts:
     paths:
       - magazine/dist/
@@ -37,6 +45,8 @@ build_magazine:
   only:
     changes:
       - magazine/**/*
+  needs:
+    - install_dependencies
 
 deploy:
   stage: deploy
