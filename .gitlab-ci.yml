@@ -55,5 +55,3 @@ deploy:
   needs:
     - build_main
     - build_magazine
-  only:
-    - main
