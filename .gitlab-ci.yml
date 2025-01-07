@@ -17,7 +17,6 @@ install_dependencies:
     paths:
       - node_modules/
     expire_in: 1 week
-    public: false
 
 build_main:
   stage: build
@@ -27,7 +26,6 @@ build_main:
     paths:
       - main/dist/
     expire_in: 1 week
-    public: false
   only:
     changes:
       - main/**/*
@@ -42,7 +40,6 @@ build_magazine:
     paths:
       - magazine/dist/
     expire_in: 1 week
-    public: false
   only:
     changes:
       - magazine/**/*
@@ -58,3 +55,5 @@ deploy:
   needs:
     - build_main
     - build_magazine
+  only:
+    - main
