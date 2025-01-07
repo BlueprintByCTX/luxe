@@ -18,6 +18,10 @@ install_dependencies:
       - node_modules/
     expire_in: 1 week
     public: false
+  only:
+    changes:
+      - main/**/*
+      - magazine/**/*
 
 build_main:
   stage: build
