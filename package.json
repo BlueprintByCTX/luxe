@@ -5,5 +5,8 @@
   "workspaces": [
     "main",
     "magazine"
-  ]
+  ],
+  "devDependencies": {
+    "@types/jquery": "^3.5.32"
+  }
 }

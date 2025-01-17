@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Recoleta';
+  src: url('fonts/Recoleta/Recoleta-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* @font-face {
+  font-family: 'Recoleta';
+  src: url('fonts/Recoleta/Recoleta-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+} */
+
+/* @font-face {
+  font-family: 'Recoleta';
+  src: url('fonts/Recoleta/Recoleta-Black.ttf') format('truetype');
+  font-weight: bolder;
+  font-style: normal;
+} */
+
+body {
+  margin: 0;
+  @apply font-poppins;
+}

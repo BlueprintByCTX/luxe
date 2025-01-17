@@ -6,14 +6,15 @@
       <img src="../assets/imgs/bg.jpeg" class="w-full h-full object-cover opacity-10" />
     </div>
 
-    <img src="../assets/imgs/logoc.png" class="w-[20rem] md:w-[26rem] my-12" />
+    <img src="../assets/imgs/logoc.png" class="w-[20rem] md:w-[26rem] mt-12" />
 
     <div class="flex lg:flex-row flex-col border-[3px] border-[#5E807F]">
-      <h1 class="bg-[#5E807F] text-white cs">coming</h1>
-      <h1 class="bg-transparent text-[#5E807F] cs">soon</h1>
+      <h1 class="bg-[#5E807F] text-white cs">It's</h1>
+      <h1 class="bg-transparent text-[#5E807F] cs">Out!</h1>
     </div>
 
     <div class="my-12 mb-36 text-[#5E807F] fill-[#5E807F] text-2xl">
+      <span class="font-bold"> Check Out Now at </span>
       <a href="https://magazine.ceylon.luxe"
         >magazine.ceylon.luxe
         <svg
