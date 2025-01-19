@@ -127,7 +127,11 @@ function closeModal() {
       class="max-w-5xl m-12 xs:m-16 sm:m-20 md:m-24 lg:m-28 xl:m-32 flex flex-col items-center ml:flex-row gap-12 lg:gap-16 xl:gap-32"
     >
       <div class="flex flex-col items-center gap-2">
-        <img src="../assets/imgs/vol1-cp.png" class="w-72 md:w-80 lg:w-96 xl:w-96 object-contain" />
+        <img
+          v-on:click="showModal"
+          src="../assets/imgs/vol1-cp.png"
+          class="w-72 md:w-80 lg:w-96 xl:w-96 object-contain cursor-pointer"
+        />
 
         <button
           v-on:click="showModal"
