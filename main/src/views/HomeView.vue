@@ -27,13 +27,19 @@ onMounted(() => {
   if (isExpired()) {
     mounted.value = true
     expired.value = true
+    setTimeout(() => {
+      window.location.href = 'https://magazine.ceylon.luxe'
+    }, 5000)
   } else {
     expired.value = false
     setInterval(() => {
       if (isExpired()) {
-        console.log('expired')
         mounted.value = true
         expired.value = true
+
+        setTimeout(() => {
+          window.location.href = 'https://magazine.ceylon.luxe'
+        }, 5000)
       }
     }, 1000)
   }
@@ -56,8 +62,6 @@ const mounted = ref(false)
 async function startFireworks() {
   if (!fw.value) return
   fw.value.start()
-  // await new Promise((resolve) => setTimeout(resolve, 1000))
-  // await fw.value.waitStop()
 }
 
 watch(fw, () => startFireworks())
