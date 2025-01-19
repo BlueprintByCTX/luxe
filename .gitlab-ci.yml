@@ -3,20 +3,20 @@ stages:
   - build
   - deploy
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-  policy: pull-push
+# cache:
+#   key: ${CI_COMMIT_REF_SLUG}
+#   paths:
+#     - node_modules/
+#   policy: pull-push
 
 install_dependencies:
   stage: install
   script:
     - npm ci
-  artifacts:
-    paths:
-      - node_modules/
-    expire_in: 1 week
+  # artifacts:
+  #   paths:
+  #     - node_modules/
+  #   expire_in: 1 week
   only:
     changes:
       - main/**/*
