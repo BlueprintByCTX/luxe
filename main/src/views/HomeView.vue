@@ -1,4 +1,67 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Countdown from '@/components/CountdownTimer.vue'
+import { onMounted, ref } from 'vue'
+
+const expired = ref(false)
+const countDownString = '2025-01-19 16:30:00'
+const countDownDate = new Date(countDownString).getTime()
+
+function isExpired(): boolean {
+  // Get today's date and time
+  const now = new Date().getTime()
+
+  // Find the distance between now and the count down date
+  const distance = countDownDate - now
+
+  // If the count down is over, write some text
+  if (distance < 0) {
+    return true
+  } else {
+    return false
+  }
+}
+
+onMounted(() => {
+  // Set the date we're counting down to
+
+  if (isExpired()) {
+    mounted.value = true
+    expired.value = true
+  } else {
+    expired.value = false
+    setInterval(() => {
+      if (isExpired()) {
+        console.log('expired')
+        mounted.value = true
+        expired.value = true
+      }
+    }, 1000)
+  }
+})
+
+import { Fireworks } from '@fireworks-js/vue'
+import { watch } from 'vue'
+import type { FireworksOptions } from '@fireworks-js/vue'
+
+const fw = ref<InstanceType<typeof Fireworks>>()
+const options = ref<FireworksOptions>({
+  opacity: 1,
+  hue: {
+    min: 90,
+    max: 240,
+  },
+})
+const mounted = ref(false)
+
+async function startFireworks() {
+  if (!fw.value) return
+  fw.value.start()
+  // await new Promise((resolve) => setTimeout(resolve, 1000))
+  // await fw.value.waitStop()
+}
+
+watch(fw, () => startFireworks())
+</script>
 
 <template>
   <div class="flex flex-col items-center relative">
@@ -6,14 +69,21 @@
       <img src="../assets/imgs/bg.jpeg" class="w-full h-full object-cover opacity-10" />
     </div>
 
-    <img src="../assets/imgs/logoc.png" class="w-[20rem] md:w-[26rem] mt-12" />
+    <img src="../assets/imgs/logoc.png" class="w-[20rem] md:w-[26rem] mt-32 mb-24" />
 
     <div class="flex lg:flex-row flex-col border-[3px] border-[#5E807F]">
-      <h1 class="bg-[#5E807F] text-white cs">It's</h1>
-      <h1 class="bg-transparent text-[#5E807F] cs">Out!</h1>
+      <h1 v-if="!expired" class="bg-[#5E807F] text-white cs">Coming</h1>
+      <h1 v-if="!expired" class="bg-transparent text-[#5E807F] cs">Soon</h1>
+      <h1 v-if="expired" class="bg-[#5E807F] text-white cs">It's</h1>
+      <h1 v-if="expired" class="bg-transparent text-[#5E807F] cs">Out!</h1>
     </div>
 
-    <div class="my-12 mb-36 text-[#5E807F] fill-[#5E807F] text-2xl">
+    <Countdown :deadline="countDownString" v-if="!expired" class="pt-12 pb-36" />
+
+    <div
+      v-if="expired"
+      class="my-12 mb-36 text-lg md:text-2xl text-[#5E807F] fill-[#5E807F] text-center px-10"
+    >
       <span class="font-bold"> Check Out Now at </span>
       <a href="https://magazine.ceylon.luxe"
         >magazine.ceylon.luxe
@@ -33,6 +103,22 @@
       </a>
     </div>
   </div>
+  <Fireworks
+    onclick="window.location.href = 'https://magazine.ceylon.luxe'"
+    ref="fw"
+    class="cursor-pointer"
+    v-if="mounted"
+    :autostart="false"
+    :options="options"
+    :style="{
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      position: 'fixed',
+      background: '#0000000',
+    }"
+  />
 </template>
 
 <style>

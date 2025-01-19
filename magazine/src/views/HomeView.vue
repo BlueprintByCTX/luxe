@@ -178,10 +178,10 @@ function closeModal() {
       >
         <h1 class="text-[#5E807F] text-sm md:text-base">Jobs & Careers</h1>
         <h1 class="font-recoleta text-3xl md:text-5xl text-center">
-          No Vacancies yet, but stay tuned!
+          Already filled, but stay tuned!
         </h1>
         <h2 class="font-cormorant text-ls md:text-xl text-center">
-          If you're interested in joining our incredible small team, please don't hesitate to
+          If you're interested in joining our team, please don't hesitate to
           <a href="#contact"><i>contact us.</i></a>
         </h2>
       </div>
