@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BannerBar from '@/components/BannerBar.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import { onMounted, onUnmounted, ref } from 'vue'
 
@@ -60,6 +61,7 @@ function closeModal() {
 </script>
 <template>
   <header class="flex flex-col absolute z-20 w-full h-dvh text-white">
+    <BannerBar />
     <nav class="flex flex-col justify-center items-center">
       <img src="../assets/imgs/logos/cluxe-white-logo.png" class="h-32 md:h-40 mt-16 mb-7" />
       <div
@@ -94,13 +96,13 @@ function closeModal() {
         <a
           href="https://www.resplendentceylon.com/resort/kayaam-house/"
           class="italic hover:underline"
-          >Kayam House</a
+          >Resplendent Ceylon - Kayaam House</a
         >
       </p>
       <a
         href="https://ceylontravelex.com"
         target="_blank"
-        class="relative hover:opacity-60 transition-opacity"
+        class="relative hover:opacity-60 transition-opacity ml-20"
       >
         <h1 class="absolute -top-1 left-0.5 text-xs font-recoleta">by</h1>
         <img src="../assets/imgs/logos/ctx-white-logo.png" class="h-8 md:h-10" />
@@ -180,9 +182,10 @@ function closeModal() {
         <h1 class="font-recoleta text-3xl md:text-5xl text-center">
           Already filled, but stay tuned!
         </h1>
-        <h2 class="font-cormorant text-ls md:text-xl text-center">
-          If you're interested in joining our team, please don't hesitate to
-          <a href="#contact"><i>contact us.</i></a>
+        <h2 class="font-cormorant text-lg md:text-xl text-center max-w-xl">
+          If you're passionate about what we do and would like to be a part of our team, we'd love
+          to hear from you! Please don't hesitate to
+          <a href="#contact"><i>reach out</i> to us for more information. </a>
         </h2>
       </div>
     </div>

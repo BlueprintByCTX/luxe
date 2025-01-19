@@ -1,5 +1,5 @@
 <template>
-  <footer id="contact" class="bg-[#5E807F] sticky w-full tracking-wide">
+  <footer id="contact" class="bg-[#5E807F] sticky w-full tracking-wide font-recoleta">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
       <div class="md:flex md:justify-between">
         <div class="mb-6 md:mb-0 mx-9 flex flex-wrap items-center">
@@ -11,7 +11,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="size-6 mr-4 overflow-visible"
+                class="size-5 mr-4 mt-2 overflow-visible"
               >
                 <path
                   stroke-linecap="round"
@@ -21,13 +21,19 @@
               </svg>
               <div>
                 <div class="flex flex-col">
-                  <b>Head Office</b>
                   <a
                     href="https://maps.app.goo.gl/ZB3JHtw2EgRvGSKu6"
-                    class="hover:underline hover:text-[#fff] transition-colors duration-300 ml-10 mt-2"
+                    class="hover:underline hover:text-white transition-colors duration-300 mt-2"
                   >
-                    <b>Sri Lanka</b> - No. 21/6, Subuthi Dr, Battaramulla, WP 10120, Sri Lanka.</a
+                    <b>Sri Lanka (Head Office) </b> - No. 21/6, Subuthi Dr, Battaramulla, WP 10120,
+                    Sri Lanka.</a
                   >
+                </div>
+                <div class="mb-2 flex flex-col">
+                  <div class="mt-2">
+                    <b>Malaysia</b> - No. 01, Jalan Eco Forest 1/1E, Eco Forest, 43500, Semenyih,
+                    Selangor, Malaysia.
+                  </div>
                 </div>
               </div>
             </div>
@@ -39,7 +45,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="size-6 mr-4 overflow-visible"
+                class="size-5 mr-4 mb-1 overflow-visible"
               >
                 <path
                   stroke-linecap="round"
@@ -61,7 +67,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="size-6 mr-4 overflow-visible"
+                class="size-5 mr-4 overflow-visible"
               >
                 <path
                   stroke-linecap="round"
@@ -82,7 +88,7 @@
       <div class="sm:flex sm:items-center sm:justify-between">
         <span class="text-xxs md:text-xs sm:text-center text-gray-50"
           >© {{ new Date().getFullYear() }}
-          <RouterLink to="/" class="hover:underline">Ceylon LUXE</RouterLink>
+          <RouterLink to="/" class="hover:underline">Ceylon LUXE<sup>®</sup></RouterLink>
           • All Rights Reserved.
         </span>
         <div class="flex mt-4 sm:justify-center sm:mt-0">
