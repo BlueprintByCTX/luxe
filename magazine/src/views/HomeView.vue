@@ -212,7 +212,7 @@ function closeModal() {
       <iframe
         allowfullscreen
         class="fp-iframe w-full h-full"
-        src="https://heyzine.com/flip-book/500bf38928.html"
+        src="https://heyzine.com/flip-book/c47921a727.html"
       ></iframe>
     </div>
   </transition>
