@@ -70,10 +70,18 @@ watch(fw, () => startFireworks())
 <template>
   <div class="flex flex-col items-center relative">
     <div class="bg-[#5e807f2a] -z-10 w-full h-full fixed flex-1">
-      <img src="../assets/imgs/bg.jpeg" class="w-full h-full object-cover opacity-10" />
+      <img
+        alt="Background"
+        src="../assets/imgs/bg.jpeg"
+        class="w-full h-full object-cover opacity-10"
+      />
     </div>
 
-    <img src="../assets/imgs/logoc.png" class="w-[20rem] md:w-[26rem] mt-32 mb-24" />
+    <img
+      alt="Ceylon LUXE"
+      src="../assets/imgs/logoc.png"
+      class="w-[20rem] md:w-[26rem] mt-32 mb-24"
+    />
 
     <div class="flex lg:flex-row flex-col border-[3px] border-[#5E807F]">
       <h1 v-if="!expired" class="bg-[#5E807F] text-white cs">Coming</h1>

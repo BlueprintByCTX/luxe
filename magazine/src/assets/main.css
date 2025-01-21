@@ -27,3 +27,9 @@ body {
   margin: 0;
   @apply font-poppins;
 }
+
+html,
+body,
+#app {
+  height: 100%;
+}

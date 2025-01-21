@@ -1,29 +1,16 @@
 <script setup lang="ts">
 import BannerBar from '@/components/BannerBar.vue'
 import FooterBar from '@/components/FooterBar.vue'
-import { onMounted, onUnmounted, ref } from 'vue'
+import FooterBarOld from '@/components/FooterBarOld.vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 const isModalVisible = ref(false)
-let op: ReturnType<typeof setTimeout>
 
-let scrollUp = false
-let prevScrollY = 0
+const observer = ref<MutationObserver>()
+const scrollY = ref(0)
 
 const handleScroll = () => {
-  const scrollY = window.scrollY
-
-  if (scrollY <= 5 && scrollUp) {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  scrollUp = scrollY < prevScrollY
-  prevScrollY = scrollY
-
-  if (scrollY <= 5) {
-    scrollUp = false
-  }
-
-  const opacity = Math.min(scrollY / 1000, 1)
+  const opacity = Math.min(scrollY.value / 1000, 1)
 
   const fadewobg = document.querySelectorAll<HTMLElement>('.fadewobg')
   fadewobg.forEach((el) => {
@@ -35,20 +22,31 @@ const handleScroll = () => {
     el.style.opacity = (1 - opacity).toString()
   })
 
-  document.getElementById('bg')!.style.transform = `translateY(${-scrollY / 2}px)`
+  document.getElementById('bg')!.style.transform = `translateY(${-scrollY.value / 2}px)`
 }
 
+watch(scrollY, handleScroll)
+
 onMounted(() => {
-  op = setTimeout(() => {
-    document.getElementById('bg')!.classList.remove('opacity-0')
-  }, 100)
   handleScroll()
-  window.addEventListener('scroll', handleScroll)
+
+  const element = document.querySelector('#smoothie > div:nth-child(1) > div')
+  let lastTransform = element.style.transform
+  observer.value = new MutationObserver(() => {
+    const currentTransform = element.style.transform.split(',')[1].trim()
+    if (currentTransform.includes('e')) return
+    if (currentTransform !== lastTransform) {
+      const match = parseInt(currentTransform.match(/-?\d+/)[0])
+      scrollY.value = match
+      lastTransform = currentTransform
+    }
+  })
+
+  observer.value.observe(element, { attributes: true, attributeFilter: ['style'] })
 })
 
 onUnmounted(() => {
-  clearTimeout(op)
-  window.removeEventListener('scroll', handleScroll)
+  observer.value.disconnect()
 })
 
 function showModal() {
@@ -63,7 +61,11 @@ function closeModal() {
   <header class="flex flex-col absolute z-20 w-full h-dvh text-white">
     <BannerBar />
     <nav class="flex flex-col justify-center items-center">
-      <img src="../assets/imgs/logos/cluxe-white-logo.png" class="h-32 md:h-40 mt-16 mb-7" />
+      <img
+        alt="Ceylon LUXE"
+        src="../assets/imgs/logos/cluxe-white-logo.png"
+        class="h-32 md:h-40 mt-16 mb-7"
+      />
       <div
         class="flex flex-col md:flex-row items-center font-normal font-recoleta uppercase space-x-4 tracking-wider"
       >
@@ -86,7 +88,11 @@ function closeModal() {
     </nav>
 
     <div class="flex flex-col grow justify-end items-center fadewbg">
-      <img src="../assets/imgs/worldinanisland.png" class="h-4 md:h-6 mb-3 px-14 object-contain" />
+      <img
+        alt="The World In An Island"
+        src="../assets/imgs/worldinanisland.png"
+        class="h-4 md:h-6 mb-3 px-14 object-contain"
+      />
       <h1 class="font-cormorant text-sm md:text-base">Not just a <i>Magazine.</i></h1>
     </div>
 
@@ -105,19 +111,29 @@ function closeModal() {
         class="relative hover:opacity-60 transition-opacity ml-20"
       >
         <h1 class="absolute -top-1 left-0.5 text-xs font-recoleta">by</h1>
-        <img src="../assets/imgs/logos/ctx-white-logo.png" class="h-8 md:h-10" />
+        <img
+          alt="Ceylon Travelex"
+          src="../assets/imgs/logos/ctx-white-logo.png"
+          class="h-8 md:h-10"
+        />
       </a>
     </div>
   </header>
 
   <img
     id="bg"
+    alt="Image Courtesy of Resplendent Ceylon - Kayaam House"
     src="../../src/assets/imgs/home-bg.jpg"
     class="fixed transition-opacity duration-1000 w-full h-screen object-cover -z-10"
   />
   <div class="fadewobg fixed w-full h-screen bg-[#dee5e5] -z-10" style="opacity: 0"></div>
 
-  <img src="../assets/imgs/lotus.png" style="opacity: 0" class="h-11 fixed z-30 m-7 fadewobg" />
+  <img
+    alt="Ceylon LUXE Lotus"
+    src="../assets/imgs/lotus.png"
+    style="opacity: 0"
+    class="h-11 fixed z-30 m-7 fadewobg"
+  />
 
   <main
     id="volumes"
@@ -128,6 +144,7 @@ function closeModal() {
     >
       <div class="flex flex-col items-center gap-2">
         <img
+          alt="Emerald Isle Of The Indian Ocean: Vol. 01"
           v-on:click="showModal"
           src="../assets/imgs/vol1-cp.png"
           class="w-72 md:w-80 lg:w-96 xl:w-96 object-contain cursor-pointer"
@@ -142,7 +159,11 @@ function closeModal() {
       </div>
 
       <div class="flex flex-col items-center gap-5 lg:gap-8 xl:gap-12">
-        <img src="../assets/imgs/en.png" class="w-56 lg:w-72 xl:w-96 object-contain" />
+        <img
+          alt="Editor's Note"
+          src="../assets/imgs/en.png"
+          class="w-56 lg:w-72 xl:w-96 object-contain"
+        />
 
         <p class="text-justify text-xxs lg:text-xs text-[#5E807F] max-w-lg">
           As the New Year pulls us towards a new season, we hope to make the best out of our
@@ -156,7 +177,11 @@ function closeModal() {
         </p>
 
         <div class="flex gap-5 lg:flex-row items-center">
-          <img src="../assets/imgs/shen.png" class="w-28 xs:w-36 lg:w-44 object-contain" />
+          <img
+            alt="Editor: Sheneli Wickremasinghe"
+            src="../assets/imgs/shen.png"
+            class="w-28 xs:w-36 lg:w-44 object-contain"
+          />
 
           <div class="w-full border border-[#5E807F]">
             <h1 class="text-white bg-[#5E807F] p-2 flex flex-col gap-0.5 lg:gap-1">
@@ -194,7 +219,8 @@ function closeModal() {
       </div>
     </div>
 
-    <FooterBar />
+    <!-- <FooterBar /> -->
+    <FooterBarOld />
   </main>
 
   <transition name="modal-fade">
