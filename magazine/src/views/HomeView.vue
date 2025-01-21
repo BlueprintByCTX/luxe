@@ -3,8 +3,7 @@ import BannerBar from '@/components/BannerBar.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import FooterBarOld from '@/components/FooterBarOld.vue'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-
-const isModalVisible = ref(false)
+import { modal } from '@/lib/state'
 
 const observer = ref<MutationObserver>()
 const scrollY = ref(0)
@@ -50,11 +49,8 @@ onUnmounted(() => {
 })
 
 function showModal() {
-  isModalVisible.value = true
-}
-
-function closeModal() {
-  isModalVisible.value = false
+  console.log('showModal')
+  modal.isVisible = true
 }
 </script>
 <template>
@@ -222,26 +218,6 @@ function closeModal() {
     <!-- <FooterBar /> -->
     <FooterBarOld />
   </main>
-
-  <transition name="modal-fade">
-    <div
-      v-if="isModalVisible"
-      id="modal"
-      class="fixed top-0 w-full h-full bg-[#dee5e5] bg-opacity-90 z-30 flex flex-col"
-    >
-      <button
-        @click="closeModal"
-        class="absolute m-3 p-3 bg-[rgb(94,128,127)] text-white z-40 opacity-65 hover:opacity-100"
-      >
-        Close
-      </button>
-      <iframe
-        allowfullscreen
-        class="fp-iframe w-full h-full"
-        src="https://heyzine.com/flip-book/c47921a727.html"
-      ></iframe>
-    </div>
-  </transition>
 </template>
 
 <style scoped>
