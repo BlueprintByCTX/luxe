@@ -30,13 +30,13 @@ watch(scrollY, handleScroll)
 onMounted(() => {
   handleScroll()
 
-  const element = document.querySelector('#smoothie > div:nth-child(1) > div')
+  const element = document.querySelector('#smoothie > div:nth-child(1) > div')! as HTMLElement
   let lastTransform = element.style.transform
   observer.value = new MutationObserver(() => {
     const currentTransform = element.style.transform.split(',')[1].trim()
     if (currentTransform.includes('e')) return
     if (currentTransform !== lastTransform) {
-      const match = parseInt(currentTransform.match(/-?\d+/)[0])
+      const match = parseInt(currentTransform.match(/-?\d+/)![0])
       scrollY.value = match
       lastTransform = currentTransform
     }
@@ -46,7 +46,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  observer.value.disconnect()
+  if (observer.value) observer.value.disconnect()
 })
 
 function showModal() {
@@ -130,7 +130,7 @@ function closeModal() {
 
   <img
     alt="Ceylon LUXE Lotus"
-    src="../assets/imgs/lotus.png"
+    src="../assets/imgs/logos/lotus.png"
     style="opacity: 0"
     class="h-11 fixed z-30 m-7 fadewobg"
   />
