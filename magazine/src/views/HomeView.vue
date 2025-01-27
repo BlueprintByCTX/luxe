@@ -2,6 +2,7 @@
 import BannerBar from '@/components/BannerBar.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import FooterBarOld from '@/components/FooterBarOld.vue'
+import { Smoothie } from 'vue-smoothie'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { modal } from '@/lib/state'
 
@@ -54,170 +55,139 @@ function showModal() {
 }
 </script>
 <template>
-  <header class="flex flex-col absolute z-20 w-full h-dvh text-white">
-    <BannerBar />
-    <nav class="flex flex-col justify-center items-center">
-      <img
-        alt="Ceylon LUXE"
-        src="../assets/imgs/logos/cluxe-white-logo.png"
-        class="h-32 md:h-40 mt-16 mb-7"
-      />
-      <div
-        class="flex flex-col md:flex-row items-center font-normal font-recoleta uppercase space-x-4 tracking-wider"
-      >
+  <Smoothie :weight="0.11" id="smoothie" class="h-full">
+    <main class="absolute z-20 flex h-dvh w-full flex-col text-white">
+      <BannerBar />
+      <nav class="flex flex-col items-center justify-center">
+        <!-- <img
+          alt="Ceylon LUXE"
+          src="../assets/imgs/logos/cluxe-white-logo.png"
+          class="mb-7 mt-16 h-32 md:h-40"
+        /> -->
+        <img alt="Ceylon LUXE" src="../assets/imgs/logos/Lux Aniii.gif" class="mb-7 mt-16 h-32 md:h-40" />
         <div
-          class="flex flex-row items-center font-normal font-recoleta uppercase text-xxs md:text-xs space-x-4 tracking-wider"
-        >
-          <RouterLink class="link" to="#volumes">Volumes</RouterLink><span>•</span>
-          <RouterLink class="link" to="#volumes">Articles</RouterLink><span>•</span>
-          <RouterLink class="link" to="#jobs">Jobs</RouterLink>
-          <span class="hidden md:block">•</span>
+          class="flex flex-col items-center space-x-4 font-recoleta font-normal uppercase tracking-wider md:flex-row">
+          <div
+            class="flex flex-row items-center space-x-4 font-recoleta text-xxs font-normal uppercase tracking-wider md:text-xs">
+            <RouterLink class="link" to="/volumes">Volumes</RouterLink><span>•</span>
+            <RouterLink class="link" to="/articles">Articles</RouterLink><span>•</span>
+            <RouterLink class="link" to="/writers">Writers</RouterLink>
+            <span class="hidden md:block">•</span>
+          </div>
+          <div
+            class="flex flex-row items-center space-x-4 font-recoleta text-xxs font-normal uppercase tracking-wider md:text-xs">
+            <RouterLink class="link" to="/awards">Awards</RouterLink>
+            <span>•</span>
+            <RouterLink class="link" to="/podcasts">Podcasts</RouterLink>
+          </div>
         </div>
-        <div
-          class="flex flex-row items-center font-normal font-recoleta uppercase text-xxs md:text-xs space-x-4 tracking-wider"
-        >
-          <RouterLink class="link" to="#contact">Contact</RouterLink>
-          <span>•</span>
-          <RouterLink class="link" to="#about">About Us</RouterLink>
-        </div>
-      </div>
-    </nav>
+      </nav>
 
-    <div class="flex flex-col grow justify-end items-center fadewbg">
-      <img
-        alt="The World In An Island"
-        src="../assets/imgs/worldinanisland.png"
-        class="h-4 md:h-6 mb-3 px-14 object-contain"
-      />
-      <h1 class="font-cormorant text-sm md:text-base">Not just a <i>Magazine.</i></h1>
-    </div>
-
-    <div class="flex flex-row justify-between items-end p-5 fadewbg">
-      <p class="font-recoleta text-xs md:text-sm font-[50]">
-        Image Courtesy of
-        <a
-          href="https://www.resplendentceylon.com/resort/kayaam-house/"
-          class="italic hover:underline"
-          >Resplendent Ceylon - Kayaam House</a
-        >
-      </p>
-      <a
-        href="https://ceylontravelex.com"
-        target="_blank"
-        class="relative hover:opacity-60 transition-opacity ml-20"
-      >
-        <h1 class="absolute -top-1 left-0.5 text-xs font-recoleta">by</h1>
-        <img
-          alt="Ceylon Travelex"
-          src="../assets/imgs/logos/ctx-white-logo.png"
-          class="h-8 md:h-10"
-        />
-      </a>
-    </div>
-  </header>
-
-  <img
-    id="bg"
-    alt="Image Courtesy of Resplendent Ceylon - Kayaam House"
-    src="../../src/assets/imgs/home-bg.jpg"
-    class="fixed transition-opacity duration-1000 w-full h-screen object-cover -z-10"
-  />
-  <div class="fadewobg fixed w-full h-screen bg-[#dee5e5] -z-10" style="opacity: 0"></div>
-
-  <img
-    alt="Ceylon LUXE Lotus"
-    src="../assets/imgs/logos/lotus.png"
-    style="opacity: 0"
-    class="h-11 fixed z-30 m-7 fadewobg"
-  />
-
-  <main
-    id="volumes"
-    class="flex flex-col w-full justify-center items-center absolute top-[100dvh] bg-[#dee5e5]"
-  >
-    <div
-      class="max-w-5xl m-12 xs:m-16 sm:m-20 md:m-24 lg:m-28 xl:m-32 flex flex-col items-center ml:flex-row gap-12 lg:gap-16 xl:gap-32"
-    >
-      <div class="flex flex-col items-center gap-2">
-        <img
-          alt="Emerald Isle Of The Indian Ocean: Vol. 01"
-          v-on:click="showModal"
-          src="../assets/imgs/vol1-cp.png"
-          class="w-72 md:w-80 lg:w-96 xl:w-96 object-contain cursor-pointer"
-        />
-
-        <button
-          v-on:click="showModal"
-          class="text-sm hover:bg-[#5E807F] px-1.5 py-1 hover:text-white uppercase tracking-wider font-recoleta"
-        >
-          click to view
-        </button>
+      <div class="fadewbg flex grow flex-col items-center justify-end">
+        <img alt="The World In An Island" src="../assets/imgs/worldinanisland.png"
+          class="mb-2 h-6 object-contain px-14 md:h-9" />
+        <h1 class="font-cormorant text-sm md:text-base">Not just a <i>Magazine.</i></h1>
       </div>
 
-      <div class="flex flex-col items-center gap-5 lg:gap-8 xl:gap-12">
-        <img
-          alt="Editor's Note"
-          src="../assets/imgs/en.png"
-          class="w-56 lg:w-72 xl:w-96 object-contain"
-        />
-
-        <p class="text-justify text-xxs lg:text-xs text-[#5E807F] max-w-lg">
-          As the New Year pulls us towards a new season, we hope to make the best out of our
-          experiences that last as long as our desires for travelling. We always believe that the
-          world is our treasure, and we search for the elite adventures and rejuvenating getaways;
-          discovering the hidden gems that are patiently waiting to be explored. Let us take you
-          around the Island's paragon, because we believe that no one has unraveled the utmost
-          potential of our diverse isle. Our close knit team has dedicated our research and
-          designing to illustrate the most awaited escapade that everyone deserves, and explore the
-          depths of its opulence.
+      <div class="fadewbg flex flex-row items-end justify-between p-5">
+        <p class="font-recoleta text-xs font-[50] md:text-sm">
+          Image Courtesy of
+          <a href="https://www.resplendentceylon.com/resort/kayaam-house/" class="italic hover:underline">Resplendent
+            Ceylon - Kayaam House</a>
         </p>
+        <a href="https://ceylontravelex.com" target="_blank"
+          class="relative ml-20 transition-opacity duration-300 hover:opacity-60">
+          <h1 class="absolute -top-1 left-0.5 font-recoleta text-xs">by</h1>
+          <img alt="Ceylon Travelex" src="../assets/imgs/logos/ctx-white-logo.png" class="h-8 md:h-10" />
+        </a>
+      </div>
+    </main>
 
-        <div class="flex gap-5 lg:flex-row items-center">
-          <img
-            alt="Editor: Sheneli Wickremasinghe"
-            src="../assets/imgs/shen.png"
-            class="w-28 xs:w-36 lg:w-44 object-contain"
-          />
+    <img id="bg" alt="Image Courtesy of Resplendent Ceylon - Kayaam House" src="../../src/assets/imgs/home-bg.jpg"
+      class="fixed -z-10 h-screen w-full object-cover transition-opacity duration-1000" />
+    <div class="fadewobg fixed -z-10 h-screen w-full bg-[#dee5e5]" style="opacity: 0"></div>
 
-          <div class="w-full border border-[#5E807F]">
-            <h1 class="text-white bg-[#5E807F] p-2 flex flex-col gap-0.5 lg:gap-1">
-              <b class="text-xs lg:text-sm uppercase tracking-wide">Sheneli Wickremasinghe</b>
-              <span class="text-xxs lg:text-xs italic">Editor</span>
-            </h1>
-            <p class="text-[#5E807F] text-xxs lg:text-xs p-2">
-              Creative by nature, she is our team's main content writer and editor.
-            </p>
+    <img alt="Ceylon LUXE Lotus" src="../assets/imgs/logos/lotus.png" style="opacity: 0"
+      class="fadewobg fixed z-30 m-7 h-11" />
+
+    <main id="volumes" class="absolute top-[100dvh] flex w-full flex-col items-center justify-center bg-[#dee5e5]">
+      <div
+        class="m-12 flex max-w-5xl flex-col items-center gap-12 xs:m-16 sm:m-20 md:m-24 ml:flex-row lg:m-28 lg:gap-16 xl:m-32 xl:gap-32">
+        <div class="flex flex-col items-center gap-2">
+          <img alt="Emerald Isle Of The Indian Ocean: Vol. 01" v-on:click="showModal" src="../assets/imgs/vol1-cp.png"
+            class="w-72 cursor-pointer object-contain md:w-80 lg:w-96 xl:w-96" />
+
+          <button v-on:click="showModal"
+            class="px-1.5 py-1 font-recoleta text-sm uppercase tracking-wider hover:bg-[#5E807F] hover:text-white">
+            click to view
+          </button>
+        </div>
+
+        <div class="flex flex-col items-center gap-5 lg:gap-8 xl:gap-12">
+          <img alt="Editor's Note" src="../assets/imgs/en.png" class="w-56 object-contain lg:w-72 xl:w-96" />
+
+          <p class="max-w-lg text-justify text-xxs text-[#5E807F] lg:text-xs">
+            As the New Year pulls us towards a new season, we hope to make the best out of our
+            experiences that last as long as our desires for travelling. We always believe that the
+            world is our treasure, and we search for the elite adventures and rejuvenating getaways;
+            discovering the hidden gems that are patiently waiting to be explored. Let us take you
+            around the Island's paragon, because we believe that no one has unraveled the utmost
+            potential of our diverse isle. Our close knit team has dedicated our research and
+            designing to illustrate the most awaited escapade that everyone deserves, and explore
+            the depths of its opulence.
+          </p>
+
+          <div class="flex items-center gap-5 lg:flex-row">
+            <img alt="Editor: Sheneli Wickremasinghe" src="../assets/imgs/shen.png"
+              class="w-28 object-contain xs:w-36 lg:w-44" />
+
+            <div class="w-full border border-[#5E807F]">
+              <h1 class="flex flex-col gap-0.5 bg-[#5E807F] p-2 text-white lg:gap-1">
+                <b class="text-xs uppercase tracking-wide lg:text-sm">Sheneli Wickremasinghe</b>
+                <span class="text-xxs italic lg:text-xs">Editor</span>
+              </h1>
+              <p class="p-2 text-xxs text-[#5E807F] lg:text-xs">
+                Creative by nature, she is our team's main content writer and editor.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <p
-      class="font-recoleta text-lg text-[#5E807F] mb-12 xs:mb-16 sm:mb-20 md:mb-24 lg:mb-28 xl:mb-32"
-    >
-      Emerald Isle Of The Indian Ocean: Vol. 01
-    </p>
+      <p class="mb-12 font-recoleta text-lg text-[#5E807F] xs:mb-16 sm:mb-20 md:mb-24 lg:mb-28 xl:mb-32">
+        Emerald Isle Of The Indian Ocean: Vol. 01
+      </p>
 
-    <div class="flex flex-col items-center w-full pattern">
-      <div
-        id="jobs"
-        class="flex flex-col items-center p-12 xs:p-16 sm:p-20 md:p-24 lg:p-28 xl:p-32 gap-4 md:gap-6 z-30 border-b-2 border-[#23705b1f]"
-      >
-        <h1 class="text-[#5E807F] text-sm md:text-base">Jobs & Careers</h1>
-        <h1 class="font-recoleta text-3xl md:text-5xl text-center">
-          Already filled, but stay tuned!
-        </h1>
-        <h2 class="font-cormorant text-lg md:text-xl text-center max-w-xl">
-          If you're passionate about what we do and would like to be a part of our team, we'd love
-          to hear from you! Please don't hesitate to
-          <a href="#contact"><i>reach out</i> to us for more information. </a>
-        </h2>
+      <div class="pattern flex w-full flex-col items-center">
+        <div id="jobs"
+          class="z-30 flex flex-col items-center gap-4 border-b-2 border-[#23705b1f] p-12 xs:p-16 sm:p-20 md:gap-6 md:p-24 lg:p-28 xl:p-32">
+          <h1 class="text-sm text-[#5E807F] md:text-base">Jobs & Careers</h1>
+          <h1 class="text-center font-recoleta text-3xl md:text-5xl">
+            Already filled, but stay tuned!
+          </h1>
+          <h2 class="max-w-xl text-center font-cormorant text-lg md:text-xl">
+            If you're passionate about what we do and would like to be a part of our team, we'd love
+            to hear from you! Please don't hesitate to
+            <a href="#contact"><i>reach out</i> to us for more information. </a>
+          </h2>
+        </div>
       </div>
-    </div>
 
-    <!-- <FooterBar /> -->
-    <FooterBarOld />
-  </main>
+      <FooterBar />
+      <!-- <FooterBarOld /> -->
+    </main>
+  </Smoothie>
+  <transition name="modal-fade">
+    <div v-if="modal.isVisible" id="modal"
+      class="fixed top-0 z-30 flex h-full w-full flex-col bg-[#dee5e5] bg-opacity-90">
+      <button @click="modal.isVisible = false"
+        class="absolute z-40 m-3 bg-[rgb(94,128,127)] p-3 text-white opacity-65 hover:opacity-100">
+        Close
+      </button>
+      <iframe allowfullscreen class="fp-iframe h-full w-full"
+        src="https://heyzine.com/flip-book/c47921a727.html"></iframe>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
@@ -225,6 +195,7 @@ function showModal() {
 .modal-fade-leave-active {
   transition: opacity 1s;
 }
+
 .modal-fade-enter,
 .modal-fade-leave-to {
   opacity: 0;
@@ -233,7 +204,7 @@ function showModal() {
 
 <style>
 .link {
-  @apply hover:bg-[#c2dbdb27] hover:border-white border-transparent border px-1.5 py-1 transition-colors duration-300;
+  @apply border border-transparent px-1.5 py-1 transition-colors duration-300 hover:border-white hover:bg-[#c2dbdb27];
 }
 
 .pattern {

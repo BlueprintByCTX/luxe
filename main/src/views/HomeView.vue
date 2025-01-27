@@ -68,40 +68,40 @@ watch(fw, () => startFireworks())
 </script>
 
 <template>
-  <div class="flex flex-col items-center relative">
-    <div class="bg-[#5e807f2a] -z-10 w-full h-full fixed flex-1">
+  <div class="relative flex flex-col items-center">
+    <div class="fixed -z-10 h-full w-full flex-1 bg-[#5e807f2a]">
       <img
         alt="Background"
         src="../assets/imgs/bg.jpeg"
-        class="w-full h-full object-cover opacity-10"
+        class="h-full w-full object-cover opacity-10"
       />
     </div>
 
     <img
       alt="Ceylon LUXE"
       src="../assets/imgs/logoc.png"
-      class="w-[20rem] md:w-[26rem] mt-32 mb-24"
+      class="mb-24 mt-32 w-[20rem] md:w-[26rem]"
     />
 
-    <div class="flex lg:flex-row flex-col border-[3px] border-[#5E807F]">
-      <h1 v-if="!expired" class="bg-[#5E807F] text-white cs">Coming</h1>
-      <h1 v-if="!expired" class="bg-transparent text-[#5E807F] cs">Soon</h1>
-      <h1 v-if="expired" class="bg-[#5E807F] text-white cs">It's</h1>
-      <h1 v-if="expired" class="bg-transparent text-[#5E807F] cs">Out!</h1>
+    <div class="flex flex-col border-[3px] border-[#5E807F] lg:flex-row">
+      <h1 v-if="!expired" class="cs bg-[#5E807F] text-white">Coming</h1>
+      <h1 v-if="!expired" class="cs bg-transparent text-[#5E807F]">Soon</h1>
+      <h1 v-if="expired" class="cs bg-[#5E807F] text-white">It's</h1>
+      <h1 v-if="expired" class="cs bg-transparent text-[#5E807F]">Out!</h1>
     </div>
 
-    <Countdown :deadline="countDownString" v-if="!expired" class="pt-12 pb-36" />
+    <Countdown :deadline="countDownString" v-if="!expired" class="pb-36 pt-12" />
 
     <div
       v-if="expired"
-      class="my-12 mb-36 text-lg md:text-2xl text-[#5E807F] fill-[#5E807F] text-center px-10"
+      class="my-12 mb-36 fill-[#5E807F] px-10 text-center text-lg text-[#5E807F] md:text-2xl"
     >
       <span class="font-bold"> Check Out Now at </span>
       <a href="https://magazine.ceylon.luxe"
         >magazine.ceylon.luxe
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="inline-block mb-0.5 h-5 w-5"
+          class="mb-0.5 inline-block h-5 w-5"
           viewBox="0 0 24 24"
           fill="none"
         >
@@ -135,6 +135,6 @@ watch(fw, () => startFireworks())
 
 <style>
 .cs {
-  @apply text-center tracking-wider text-7xl md:text-9xl p-4 pt-8 md:p-8 md:pt-14 uppercase font-relineRosery;
+  @apply p-4 pt-8 text-center font-relineRosery text-7xl uppercase tracking-wider md:p-8 md:pt-14 md:text-9xl;
 }
 </style>

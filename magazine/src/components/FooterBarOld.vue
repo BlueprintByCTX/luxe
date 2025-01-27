@@ -1,9 +1,9 @@
 <template>
-  <footer id="contact" class="bg-[#5E807F] sticky w-full tracking-wide font-recoleta">
+  <footer id="contact" class="sticky w-full bg-[#5E807F] font-recoleta tracking-wide">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
       <div class="md:flex md:justify-between">
-        <div class="mb-6 md:mb-0 mx-9 flex flex-wrap items-center">
-          <div class="text-gray-300 text-xxs md:text-xs">
+        <div class="mx-9 mb-6 flex flex-wrap items-center md:mb-0">
+          <div class="text-xxs text-gray-300 md:text-xs">
             <div class="flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="size-5 mr-4 mt-2 overflow-visible"
+                class="mr-4 mt-2 size-5 overflow-visible"
               >
                 <path
                   stroke-linecap="round"
@@ -23,7 +23,7 @@
                 <div class="flex flex-col">
                   <a
                     href="https://maps.app.goo.gl/ZB3JHtw2EgRvGSKu6"
-                    class="hover:underline hover:text-white transition-colors duration-300 mt-2"
+                    class="mt-2 transition-colors duration-300 hover:text-white hover:underline"
                   >
                     <b>Sri Lanka (Head Office) </b> - No. 21/6, Subuthi Dr, Battaramulla, WP 10120,
                     Sri Lanka.</a
@@ -45,7 +45,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="size-5 mr-4 mb-1 overflow-visible"
+                class="mb-1 mr-4 size-5 overflow-visible"
               >
                 <path
                   stroke-linecap="round"
@@ -55,7 +55,7 @@
               </svg>
               <a
                 href="mailto:helloctx@ceylontravelex.com"
-                class="hover:underline hover:text-[#fff] transition-colors duration-300 pb-1"
+                class="pb-1 transition-colors duration-300 hover:text-[#fff] hover:underline"
                 >helloctx@ceylontravelex.com</a
               >
             </div>
@@ -67,7 +67,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="size-5 mr-4 overflow-visible"
+                class="mr-4 size-5 overflow-visible"
               >
                 <path
                   stroke-linecap="round"
@@ -77,28 +77,28 @@
               </svg>
               <a
                 href="tel:+94-77-355-3553"
-                class="hover:underline hover:text-[#fff] transition-colors duration-300"
+                class="transition-colors duration-300 hover:text-[#fff] hover:underline"
                 >+94 773 553 553</a
               >
             </div>
           </div>
         </div>
       </div>
-      <hr class="my-6 sm:mx-auto border-[#fff] lg:my-8" />
+      <hr class="my-6 border-[#fff] sm:mx-auto lg:my-8" />
       <div class="sm:flex sm:items-center sm:justify-between">
-        <span class="text-xxs md:text-xs sm:text-center text-gray-50"
+        <span class="text-xxs text-gray-50 sm:text-center md:text-xs"
           >© {{ new Date().getFullYear() }}
           <RouterLink to="/" class="hover:underline">Ceylon LUXE<sup>®</sup></RouterLink>
           • All Rights Reserved.
         </span>
-        <div class="flex mt-4 sm:justify-center sm:mt-0">
+        <div class="mt-4 flex sm:mt-0 sm:justify-center">
           <a
             href="https://www.facebook.com/ceylonluxe"
             aria-label="Facebook Page"
             class="text-gray-200 hover:text-[#fff]"
           >
             <svg
-              class="w-4 h-4"
+              class="h-4 w-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -114,11 +114,11 @@
           <a
             href="https://www.instagram.com/ceylonluxe/"
             aria-label="Instagram Page"
-            class="text-gray-200 hover:text-[#fff] ms-5"
+            class="ms-5 text-gray-200 hover:text-[#fff]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="w-4 h-4"
+              class="h-4 w-4"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -127,14 +127,13 @@
               />
             </svg>
           </a>
-
           <a
             href="https://www.linkedin.com/showcase/ceylonluxe"
             aria-label="LinkedIn Page"
-            class="text-gray-200 hover:text-[#fff] ms-5"
+            class="ms-5 text-gray-200 hover:text-[#fff]"
           >
             <svg
-              class="w-4 h-4"
+              class="h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
               viewBox="0 0 16 16"
@@ -147,11 +146,11 @@
           <a
             href="https://www.youtube.com/@CeylonLUXE"
             aria-label="Youtube Page"
-            class="text-gray-200 hover:text-[#fff] ms-5"
+            class="ms-5 text-gray-200 hover:text-[#fff]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="w-4 h-4"
+              class="h-4 w-4"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
