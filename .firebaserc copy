@@ -1,0 +1,19 @@
+{
+  "projects": {
+    "default": "ceylonluxe"
+  },
+  "targets": {
+    "ceylonluxe": {
+      "hosting": {
+        "main": [
+          "ceylonluxe"
+        ],
+        "magazine": [
+          "magazineceylonluxe"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
