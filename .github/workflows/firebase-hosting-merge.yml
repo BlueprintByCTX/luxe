@@ -1,0 +1,99 @@
+name: Deploy to Firebase Hosting on merge
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  detect_changes:
+    runs-on: ubuntu-latest
+    outputs:
+      changed_main: ${{ steps.detect.outputs.changed_main }}
+      changed_magazine: ${{ steps.detect.outputs.changed_magazine }}
+    steps:
+      # Step 1: Checkout repository
+      - uses: actions/checkout@v4
+
+      # Step 2: Detect changes
+      - name: Detect changes
+        id: detect
+        run: |
+          # Check if the "main/" or "magazine/" directories have changes
+          CHANGED_MAIN=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q '^main/' && echo "true" || echo "false")
+          CHANGED_MAGAZINE=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q '^magazine/' && echo "true" || echo "false")
+
+          # Export the result as GitHub Actions outputs
+          echo "changed_main=$CHANGED_MAIN" >> $GITHUB_OUTPUT
+          echo "changed_magazine=$CHANGED_MAGAZINE" >> $GITHUB_OUTPUT
+
+  build_and_deploy_main:
+    needs: detect_changes
+    runs-on: ubuntu-latest
+    if: needs.detect_changes.outputs.changed_main == 'true'
+    steps:
+      # Step 1: Checkout repository
+      - uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js and pnpm
+      - name: Set up Node.js and pnpm
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: pnpm install
+
+      # Step 4: Build the "main" site
+      - name: Build main site
+        run: |
+          echo "Building 'main' site"
+          cd main
+          pnpm run build
+
+      # Step 5: Deploy the "main" site to the Firebase "main" target
+      - name: Deploy main site
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CEYLONLUXE }}
+          channelId: live
+          target: main
+
+  build_and_deploy_magazine:
+    needs: detect_changes
+    runs-on: ubuntu-latest
+    if: needs.detect_changes.outputs.changed_magazine == 'true'
+    steps:
+      # Step 1: Checkout repository
+      - uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js and pnpm
+      - name: Set up Node.js and pnpm
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: pnpm install
+
+      # Step 4: Build the "magazine" site
+      - name: Build magazine site
+        run: |
+          echo "Building 'magazine' site"
+          cd magazine
+          pnpm run build
+
+      # Step 5: Deploy the "magazine" site to the Firebase "magazine" target
+      - name: Deploy magazine site
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CEYLONLUXE }}
+          channelId: live
+          target: magazine
