@@ -11,10 +11,10 @@ jobs:
       changed_main: ${{ steps.detect.outputs.changed_main }}
       changed_magazine: ${{ steps.detect.outputs.changed_magazine }}
     steps:
-      # Step 1: Checkout repository with sufficient history
+      # Step 1: Checkout repository with full history
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch the full Git history
+          fetch-depth: 0
 
       # Step 2: Detect changes
       - name: Detect changes
@@ -36,14 +36,17 @@ jobs:
       # Step 1: Checkout repository
       - uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js and pnpm
-      - name: Set up Node.js and pnpm
+      # Step 2: Install Node.js and pnpm
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "pnpm"
+          cache: pnpm
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 9 # Specify a stable version of pnpm
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -56,7 +59,7 @@ jobs:
           cd main
           pnpm run build
 
-      # Step 5: Deploy the "main" site to the Firebase "main" target
+      # Step 5: Deploy the "main" site
       - name: Deploy main site
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -72,14 +75,17 @@ jobs:
       # Step 1: Checkout repository
       - uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js and pnpm
-      - name: Set up Node.js and pnpm
+      # Step 2: Install Node.js and pnpm
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "pnpm"
+          cache: pnpm
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 9 # Specify a stable version of pnpm
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -92,7 +98,7 @@ jobs:
           cd magazine
           pnpm run build
 
-      # Step 5: Deploy the "magazine" site to the Firebase "magazine" target
+      # Step 5: Deploy the "magazine" site
       - name: Deploy magazine site
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
